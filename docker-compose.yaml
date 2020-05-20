@@ -1,0 +1,14 @@
+version: "3.5"
+
+services:
+
+  frontend:
+    container_name: city-frontend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - '.:/app'
+      - '/app/node_modules'
+    ports:
+      - '8081:8080'

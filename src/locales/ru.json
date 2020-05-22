@@ -1,0 +1,27 @@
+{
+  "message": "hello i18n !!",
+  "message2": "{in} hello i18n !!",
+  "LOADING": "Загрузка...",
+  "LOGIN_FORM": {
+    "TITLE": "Авторизация",
+    "LOGIN_BTN": "Войти",
+    "EMAIL": "Email",
+    "PASSWORD": "Пароль"
+  },
+  "REGISTER_FORM": {
+    "TITLE": "Регистрация",
+    "REGISTER_BTN": "Зарегистрироваться",
+    "EMAIL": "Email",
+    "PASSWORD": "Пароль",
+    "NAME": "Имя",
+    "FOLLOW_EMAIL_LINK": "Пройдите по ссылке из почты для завершения регистрации"
+  },
+  "LOGIN_REGISTER_TABS": {
+    "LOGIN": "Вход",
+    "REGISTER": "Регистрация"
+  },
+  "EMAIL_VERIFICATION": {
+    "EMAIL_VERIFIED": "Email подтверждён.",
+    "ERROR": "Произошла ошибка при проверки почты."
+  }
+}

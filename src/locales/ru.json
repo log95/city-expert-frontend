@@ -23,5 +23,8 @@
   "EMAIL_VERIFICATION": {
     "EMAIL_VERIFIED": "Email подтверждён.",
     "ERROR": "Произошла ошибка при проверки почты."
+  },
+  "CITY": {
+    "MSC": "Москва"
   }
 }

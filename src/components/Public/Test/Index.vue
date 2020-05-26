@@ -120,6 +120,7 @@
 
 <script>
     import api from '@/api';
+    import qs from 'qs';
     import ListItem from '@/components/Public/Test/ListItem';
     import TestStatus from "@/enum/TestStatus";
 
@@ -180,7 +181,8 @@
                             status: this.filterStatus ? this.filterStatus : '',
                             city_id: this.filterCity,
                         },
-                    }
+                    },
+                    paramsSerializer: paramsInput => qs.stringify(paramsInput, { arrayFormat: 'brackets' }),
                 })
                     .then(response => {
                         this.tests = response.data.tests;

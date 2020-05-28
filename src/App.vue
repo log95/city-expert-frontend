@@ -4,6 +4,7 @@
       app
       color="primary"
       dark
+      absolute
     >
       <v-toolbar-title>City Expert</v-toolbar-title>
 

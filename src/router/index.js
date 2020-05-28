@@ -4,6 +4,7 @@ import StartPage from '@/components/StartPage'
 import EmailVerification from '@/components/EmailVerification'
 import LoginRegisterForm from '@/components/LoginRegisterForm'
 import PublicTestIndexPage from '@/pages/Public/Test/Index'
+import EmptyRouterPage from '@/pages/EmptyRouterPage'
 import PublicTestShowPage from '@/pages/Public/Test/Show'
 
 Vue.use(Router);
@@ -28,9 +29,13 @@ export default new Router({
         },
         {
             path: '/tests',
-            name: 'PublicTestIndexPage',
-            component: PublicTestIndexPage,
+            component: EmptyRouterPage,
             children: [
+                {
+                    path: '',
+                    name: 'PublicTestIndexPage',
+                    component: PublicTestIndexPage,
+                },
                 {
                     path: ':test_id',
                     name: 'PublicTestShowPage',

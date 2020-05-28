@@ -26,5 +26,17 @@
   },
   "CITY": {
     "MSC": "Москва"
+  },
+  "TEST_STATUS": {
+    "in_process": "В процессе",
+    "correct_answer": "Правильный ответ",
+    "show_answer": "Подсмотрен ответ"
+  },
+  "POINT": "очко",
+  "POINTS": "очков",
+  "POINTS_NOTICE": {
+    "HINT": "Подсказка: {points} @:POINT",
+    "SHOW_ANSWER": "Просмотр ответа: {points} @:POINTS",
+    "CORRECT_ANSWER": "Правильно: {points} @:POINTS"
   }
 }

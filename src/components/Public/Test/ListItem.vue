@@ -13,20 +13,18 @@
                     :class="test['status']"
             ></v-img>
         </router-link>
-        <v-row justify="center" align="center">
-            <v-col cols="12" sm="2" md="2" lg="2">
-                <v-btn icon disabled>
-                    <v-icon>mdi-thumb-up</v-icon>
-                    <span>{{ test['likes'] }}</span>
-                </v-btn>
-            </v-col>
-            <v-col cols="12" sm="2" md="2" lg="2">
-                <v-btn icon disabled>
-                    <v-icon>mdi-thumb-down</v-icon>
-                    <span>{{ test['dislikes'] }}</span>
-                </v-btn>
-            </v-col>
-        </v-row>
+
+        <div class="d-flex justify-center mb-6">
+            <v-btn icon disabled style="margin-right: 10px">
+                <v-icon>mdi-thumb-up</v-icon>
+                <span>{{ test['likes'] }}</span>
+            </v-btn>
+            <v-btn icon disabled>
+                <v-icon>mdi-thumb-down</v-icon>
+                <span>{{ test['dislikes'] }}</span>
+            </v-btn>
+        </div>
+
     </v-col>
 </template>
 

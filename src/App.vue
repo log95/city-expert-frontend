@@ -1,17 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-      absolute
-    >
-      <v-toolbar-title>City Expert</v-toolbar-title>
-
-      <v-spacer></v-spacer>
-
-
-    </v-app-bar>
+    <LayoutHeader></LayoutHeader>
 
     <v-content>
       <v-container fluid>
@@ -38,8 +27,12 @@
 </template>
 
 <script>
+  import LayoutHeader from '@/components/Layout/Header';
 
-export default {
-  name: 'App',
-};
+  export default {
+    name: 'App',
+    components: {
+      LayoutHeader,
+    },
+  };
 </script>

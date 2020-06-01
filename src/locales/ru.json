@@ -1,6 +1,4 @@
 {
-  "message": "hello i18n !!",
-  "message2": "{in} hello i18n !!",
   "LOADING": "Загрузка...",
   "LOGIN_FORM": {
     "TITLE": "Авторизация",
@@ -38,5 +36,17 @@
     "HINT": "Подсказка: {points} @:POINT",
     "SHOW_ANSWER": "Просмотр ответа: {points} @:POINTS",
     "CORRECT_ANSWER": "Правильно: {points} @:POINTS"
+  },
+  "TEST": {
+    "QUESTION": "Вопрос",
+    "ANSWER": "Ответ",
+    "HINTS": "Подсказки"
+  },
+  "SAVE_BTN": "Сохранить",
+  "CANCEL_BTN": "Отменить",
+  "HINT_NUM": "Подсказка №{num}",
+  "TEST_CREATE": {
+    "ADD_HINT": "Добавить",
+    "SUCCESS_CREATED": "Тест успешно создан. После проверки модератором вы получите уведомление."
   }
 }

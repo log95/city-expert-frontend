@@ -5,6 +5,8 @@
     <v-content>
       <v-container fluid>
         <router-view></router-view>
+
+        <Snackbar></Snackbar>
       </v-container>
     </v-content>
 
@@ -28,11 +30,13 @@
 
 <script>
   import LayoutHeader from '@/components/Layout/Header';
+  import Snackbar from "@/components/Ui/Snackbar";
 
   export default {
     name: 'App',
     components: {
       LayoutHeader,
+      Snackbar,
     },
   };
 </script>

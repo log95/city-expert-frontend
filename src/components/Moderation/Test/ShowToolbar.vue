@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-btn
-            @click="test"
+            @click="test2"
             color="primary"
             text
         >
@@ -13,6 +13,7 @@
 <script>
     import TestPublishStatus from '@/enum/TestPublishStatus';
     import api from '@/api';
+    import { mapMutations } from 'vuex';
 
     export default {
         name: 'ModerationTestShowToolbar',
@@ -43,9 +44,12 @@
                     this.isLoading = false;
                 }
             },
-            test: function () {
-                alert(22);
-            }
+            test2: function () {
+                this.addNotification({'text': 'ttt tttt'});
+            },
+            ...mapMutations({
+                addNotification: 'snackbar/addNotification',
+            }),
         },
     }
 </script>

@@ -56,5 +56,10 @@
     "APPROVE_SUBMITTED": "Тест одобрен.",
     "REJECT_SUBMITTED": "Тест отправлен на корректировку.",
     "EMPTY_MESSAGE_ON_MODERATOR_REJECT": "При отклонении нужно оставить как минимум одно сообщение."
+  },
+  "TEST_PUBLISH_STATUS": {
+    "REVIEWED": "На проверке",
+    "ON_CORRECTION": "На корректировке",
+    "APPROVED": "Одобрен"
   }
 }

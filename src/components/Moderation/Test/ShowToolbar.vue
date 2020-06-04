@@ -1,24 +1,37 @@
 <template>
-    <div>
+    <v-card-actions v-if="isStatusReviewed && isShowToolbar">
         <v-btn
-            @click="test2"
-            color="primary"
-            text
+                @click="rejectTest"
+                :loading="isLoading"
+                color="error"
+                text
         >
-            Test
+            {{ $t('MODERATION_TEST.REJECT_BTN') }}
         </v-btn>
-    </div>
+
+        <v-spacer></v-spacer>
+
+        <v-btn
+                @click="approveTest"
+                :loading="isLoading"
+                color="success"
+                text
+        >
+            {{ $t('MODERATION_TEST.APPROVE_BTN') }}
+        </v-btn>
+    </v-card-actions>
 </template>
 
 <script>
-    import TestPublishStatus from '@/enum/TestPublishStatus';
     import api from '@/api';
+    import TestPublishStatus from '@/enum/TestPublishStatus';
     import { mapMutations } from 'vuex';
 
     export default {
         name: 'ModerationTestShowToolbar',
         data: () => ({
             isLoading: false,
+            isShowToolbar: true,
         }),
         props: [
             'test',
@@ -27,16 +40,26 @@
             isStatusReviewed: function () {
                 return this.test.status === TestPublishStatus.REVIEWED;
             },
-            isStatusOnCorrection: function () {
-                return this.test.status === TestPublishStatus.ON_CORRECTION;
-            },
         },
         methods: {
-            async returnOnCorrection() {
-                try {
-                    await api.patch('account/tests/' + this.test.id + '/to-correction/');
+            ...mapMutations({
+                addNotification: 'snackbar/addNotification',
+            }),
+            async approveTest() {
+                this.isLoading = true;
 
-                    this.$router.push({name: 'AccountTestUpdatePage', params: { test_id: this.test.id }});
+                try {
+                    api.post('moderation/tests/' + this.test.id + '/approve/');
+
+                    this.isShowToolbar = false;
+
+                    this.test.status = TestPublishStatus.APPROVED;
+
+                    this.addNotification({
+                        'text': this.$t('MODERATION_TEST.APPROVE_SUBMITTED'),
+                        'color': 'success',
+                        'timeout': 5000,
+                    });
                 } catch (error) {
                     alert('Error');
                     console.log(error.response);
@@ -44,12 +67,36 @@
                     this.isLoading = false;
                 }
             },
-            test2: function () {
-                this.addNotification({'text': 'ttt tttt'});
+            async rejectTest() {
+                this.isLoading = true;
+
+                try {
+                    await api.post('moderation/tests/' + this.test.id + '/reject/');
+
+                    this.isShowToolbar = false;
+
+                    this.test.status = TestPublishStatus.ON_CORRECTION;
+
+                    this.addNotification({
+                        'text': this.$t('MODERATION_TEST.REJECT_SUBMITTED'),
+                        'color': 'success',
+                        'timeout': 5000,
+                    });
+                } catch (error) {
+                    if (error.response.data.type && error.response.data.type === 'EMPTY_MESSAGE_ON_MODERATOR_REJECT') {
+                        this.addNotification({
+                            'text': this.$t('MODERATION_TEST.EMPTY_MESSAGE_ON_MODERATOR_REJECT'),
+                            'color': 'error',
+                            'timeout': 3000,
+                        });
+                    } else {
+                        alert('Error');
+                        console.log(error.response);
+                    }
+                } finally {
+                    this.isLoading = false;
+                }
             },
-            ...mapMutations({
-                addNotification: 'snackbar/addNotification',
-            }),
         },
     }
 </script>

@@ -1,5 +1,5 @@
 <template>
-    <TestShow>
+    <TestShow :isViewByCreator="true">
         <template v-slot:toolbar="{ test }">
             <Toolbar :test="test"></Toolbar>
         </template>

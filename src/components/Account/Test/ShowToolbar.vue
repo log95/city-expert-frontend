@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <v-card-actions>
         <v-btn
             v-if="isStatusReviewed"
             @click="returnOnCorrection"
@@ -19,7 +19,7 @@
         >
             Обновить
         </v-btn>
-    </div>
+    </v-card-actions>
 </template>
 
 <script>

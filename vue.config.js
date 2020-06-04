@@ -10,5 +10,7 @@ module.exports = {
       localeDir: 'locales',
       enableInSFC: false
     }
-  }
+  },
+
+  lintOnSave: false // TODO: пока мешает правилом no-unused-var
 }

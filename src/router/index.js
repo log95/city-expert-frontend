@@ -9,6 +9,9 @@ import PublicTestShowPage from '@/pages/Public/Test/Show'
 import AccountTestIndexPage from '@/pages/Account/Test/Index'
 import AccountTestShowPage from '@/pages/Account/Test/Show'
 import AccountTestCreatePage from '@/pages/Account/Test/Create'
+import AccountTestUpdatePage from '@/pages/Account/Test/Update'
+import ModerationTestIndexPage from '@/pages/Moderation/Test/Index'
+import ModerationTestShowPage from '@/pages/Moderation/Test/Show'
 
 const originalPush = Router.prototype.push;
 Router.prototype.push = function push(location) {
@@ -77,6 +80,33 @@ export default new Router({
                             path: ':test_id',
                             name: 'AccountTestShowPage',
                             component: AccountTestShowPage,
+                        },
+                        {
+                            path: ':test_id/update',
+                            name: 'AccountTestUpdatePage',
+                            component: AccountTestUpdatePage,
+                        },
+                    ],
+                }
+            ],
+        },
+        {
+            path: '/moderation',
+            component: EmptyRouterPage,
+            children: [
+                {
+                    path: 'tests',
+                    component: EmptyRouterPage,
+                    children: [
+                        {
+                            path: '',
+                            name: 'ModerationTestIndexPage',
+                            component: ModerationTestIndexPage,
+                        },
+                        {
+                            path: ':test_id',
+                            name: 'ModerationTestShowPage',
+                            component: ModerationTestShowPage,
                         }
                     ],
                 }

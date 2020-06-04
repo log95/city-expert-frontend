@@ -40,7 +40,8 @@
   "TEST": {
     "QUESTION": "Вопрос",
     "ANSWER": "Ответ",
-    "HINTS": "Подсказки"
+    "HINTS": "Подсказки",
+    "CITY": "Город"
   },
   "SAVE_BTN": "Сохранить",
   "CANCEL_BTN": "Отменить",
@@ -48,5 +49,12 @@
   "TEST_CREATE": {
     "ADD_HINT": "Добавить",
     "SUCCESS_CREATED": "Тест успешно создан. После проверки модератором вы получите уведомление."
+  },
+  "MODERATION_TEST": {
+    "APPROVE_BTN": "Одобрить",
+    "REJECT_BTN": "На корректировку",
+    "APPROVE_SUBMITTED": "Тест одобрен.",
+    "REJECT_SUBMITTED": "Тест отправлен на корректировку.",
+    "EMPTY_MESSAGE_ON_MODERATOR_REJECT": "При отклонении нужно оставить как минимум одно сообщение."
   }
 }

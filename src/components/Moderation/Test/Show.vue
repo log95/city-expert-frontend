@@ -8,7 +8,7 @@
 
 <script>
     import TestShow from '@/components/Publication/TestShow';
-    import Toolbar from '@/components/Account/Test/ShowToolbar';
+    import Toolbar from '@/components/Moderation/Test/ShowToolbar';
 
     export default {
         name: 'AccountTestShow',

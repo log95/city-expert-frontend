@@ -45,6 +45,7 @@
   },
   "SAVE_BTN": "Сохранить",
   "CANCEL_BTN": "Отменить",
+  "SAVE_AND_SEND_BTN": "Сохранить и отправить",
   "HINT_NUM": "Подсказка №{num}",
   "TEST_CREATE": {
     "ADD_HINT": "Добавить",

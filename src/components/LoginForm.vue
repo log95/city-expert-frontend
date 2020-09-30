@@ -59,7 +59,9 @@
                     })
                     .then(response => {
                         localStorage.setItem('JWT_TOKEN', response.data.token);
-                        this.$router.push({name: 'StartPage'});
+
+                        let startPage = this.$router.resolve({'name': 'StartPage'});
+                        window.location.href = startPage.href;
                     })
                     .catch(error => {
                         alert('Error');

@@ -76,10 +76,9 @@
             logout: function () {
                 window.localStorage.removeItem('JWT_TOKEN');
 
-                this.$router.push({name: 'StartPage'});
-
                 // header не перерисовывается без reload, а пункты меню другие.
-                window.location.reload();
+                let startPage = this.$router.resolve({'name': 'StartPage'});
+                window.location.href = startPage.href;
             },
         },
     }

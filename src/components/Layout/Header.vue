@@ -73,11 +73,13 @@
             },
         },
         methods: {
-            // TODO: после logout header не перерисовывается из-за роутера
             logout: function () {
                 window.localStorage.removeItem('JWT_TOKEN');
 
                 this.$router.push({name: 'StartPage'});
+
+                // header не перерисовывается без reload, а пункты меню другие.
+                window.location.reload();
             },
         },
     }

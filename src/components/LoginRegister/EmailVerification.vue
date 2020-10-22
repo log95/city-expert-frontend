@@ -21,7 +21,7 @@
 </template>
 
 <script>
-    import axios from 'axios';
+    import api from '@/api';
 
     export default {
         name: 'EmailVerification',
@@ -30,8 +30,8 @@
             isSuccessCheck: false,
         }),
         created() {
-            axios
-                .post('http://localhost:8082/api/v1/account/verify/' + this.$route.params['user_id'] + '/' + this.$route.params['code'] + '/')
+            api
+                .post('account/verify/' + this.$route.params['user_id'] + '/' + this.$route.params['code'] + '/')
                 .then(() => {
                     this.isSuccessCheck = true;
                 })

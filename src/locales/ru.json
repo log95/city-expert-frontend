@@ -1,5 +1,14 @@
 {
+  "MAIN_TOOLBAR_TITLE": "Город",
+  "HEADER_TOOLBAR": {
+    "ENTER": "Войти",
+    "MY_TESTS": "Мои тесты"
+  },
   "LOADING": "Загрузка...",
+  "REQUIRED_FIELD": "Обязательное поле",
+  "MIN_FIELD": "Минимум {num} символов",
+  "MAX_FIELD": "Максимум {num} символов",
+  "NOT_VALID_EMAIL": "Неверная почта",
   "LOGIN_FORM": {
     "TITLE": "Авторизация",
     "LOGIN_BTN": "Войти",

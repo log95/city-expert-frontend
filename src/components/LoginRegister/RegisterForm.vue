@@ -24,7 +24,7 @@
                     <v-text-field
                             :label="$t('REGISTER_FORM.PASSWORD')"
                             v-model="password"
-                            :rules="[rules.required, rules.passwordMin]"
+                            :rules="[rules.required, rules.passwordMin, rules.passwordMax]"
                             :type="isShowPassword ? 'text' : 'password'"
                             :append-icon="isShowPassword ? 'mdi-eye' : 'mdi-eye-off'"
                             @click:append="isShowPassword = !isShowPassword"
@@ -45,37 +45,40 @@
 </template>
 
 <script>
-    import axios from 'axios';
+    import api from '@/api';
 
     export default {
         name: 'RegisterForm',
-        data: () => ({
-            name: null,
-            email: null,
-            password: null,
-            isValid: true,
-            isLoading: false,
-            isShowPassword: false,
-            isSuccessSubmitted: false,
-            rules: {
-                required: v => !!v || "Required",
-                passwordMin: v => (v && v.length >= 8) || "Min 8 characters",
-                email: v => /.+@.+\..+/.test(v) || "E-mail must be valid",
-            },
-        }),
+        data: function () {
+            return {
+                name: null,
+                email: null,
+                password: null,
+                isValid: false,
+                isLoading: false,
+                isShowPassword: false,
+                isSuccessSubmitted: false,
+                rules: {
+                    required: v => !!v || this.$t('REQUIRED_FIELD'),
+                    passwordMin: v => (v && v.length >= 8) || this.$t('MIN_FIELD', {num: 8}),
+                    passwordMax: v => (v && v.length >= 8) || this.$t('MAX_FIELD', {num: 100}),
+                    nameMax: v => (v && v.length >= 100) || this.$t('MAX_FIELD', {num: 100}),
+                    email: v => /.+@.+\..+/.test(v) || this.$t('NOT_VALID_EMAIL'),
+                },
+            }
+        },
         methods: {
             sendForm: function () {
                 this.isLoading = true;
 
-                axios
-                    .post('http://localhost:8082/api/v1/account/register/', {
+                api
+                    .post('account/register/', {
                         'name': this.name,
                         'email': this.email,
                         'password': this.password,
                     })
                     .then(response => {
                         this.isSuccessSubmitted = true;
-                        console.log(response);
                     })
                     .catch(error => {
                         alert('Error');

@@ -5,7 +5,7 @@
             dark
             absolute
     >
-        <v-toolbar-title>City Expert</v-toolbar-title>
+        <v-toolbar-title>{{ $t('MAIN_TOOLBAR_TITLE') }}</v-toolbar-title>
 
         <v-spacer></v-spacer>
 
@@ -24,13 +24,13 @@
 
                 <v-list-item
                         v-if="!isAuthorized"
-                        @click="$router.push({name: 'LoginRegisterForm'})"
+                        @click="$router.push({name: 'LoginRegister'})"
                 >
                     <v-list-item-icon>
                         <v-icon>mdi-account-plus</v-icon>
                     </v-list-item-icon>
                     <v-list-item-content>
-                        <v-list-item-title>Войти</v-list-item-title>
+                        <v-list-item-title>{{ $t('HEADER_TOOLBAR.ENTER') }}</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
 
@@ -42,7 +42,7 @@
                         <v-icon>mdi-format-list-bulleted-square</v-icon>
                     </v-list-item-icon>
                     <v-list-item-content>
-                        <v-list-item-title>Мои тесты</v-list-item-title>
+                        <v-list-item-title>{{ $t('HEADER_TOOLBAR.MY_TESTS') }}</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
 

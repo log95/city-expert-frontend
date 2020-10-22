@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import StartPage from '@/components/StartPage'
-import EmailVerification from '@/components/EmailVerification'
-import LoginRegisterForm from '@/components/LoginRegisterForm'
 import EmptyRouterPage from '@/pages/EmptyRouterPage'
+import StartPage from '@/pages/StartPage'
+import EmailVerification from '@/pages/LoginRegister/EmailVerification'
+import LoginRegister from '@/pages/LoginRegister/LoginRegister'
 import PublicTestIndexPage from '@/pages/Public/Test/Index'
 import PublicTestShowPage from '@/pages/Public/Test/Show'
 import AccountTestIndexPage from '@/pages/Account/Test/Index'
@@ -39,8 +39,8 @@ export default new Router({
         },
         {
             path: '/login',
-            name: 'LoginRegisterForm',
-            component: LoginRegisterForm,
+            name: 'LoginRegister',
+            component: LoginRegister,
         },
         {
             path: '/tests',

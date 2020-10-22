@@ -32,28 +32,30 @@
 </template>
 
 <script>
-    import axios from 'axios';
+    import api from '@/api';
 
     export default {
         name: 'LoginForm',
-        data: () => ({
-            email: null,
-            password: null,
-            isValid: true,
-            isLoading: false,
-            isShowPassword: false,
-            rules: {
-                required: v => !!v || "Required",
-                passwordMin: v => (v && v.length >= 8) || "Min 8 characters",
-                email: v => /.+@.+\..+/.test(v) || "E-mail must be valid",
-            },
-        }),
+        data: function () {
+            return {
+                email: null,
+                password: null,
+                isValid: false,
+                isLoading: false,
+                isShowPassword: false,
+                rules: {
+                    required: v => !!v || this.$t('REQUIRED_FIELD'),
+                    passwordMin: v => (v && v.length >= 8) || this.$t('MIN_FIELD', {num: 8}),
+                    email: v => /.+@.+\..+/.test(v) || this.$t('NOT_VALID_EMAIL'),
+                },
+            }
+        },
         methods: {
             sendForm: function () {
                 this.isLoading = true;
 
-                axios
-                    .post('http://localhost:8082/api/v1/account/login/', {
+                api
+                    .post('account/login/', {
                         'username': this.email,
                         'password': this.password,
                     })

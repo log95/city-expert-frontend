@@ -1,4 +1,7 @@
 {
+  "MAIN_TOOLBAR_ITEMS": {
+    "TESTS": "Тесты"
+  },
   "APP_NAME": "Город",
   "HEADER_TOOLBAR": {
     "ENTER": "Войти",

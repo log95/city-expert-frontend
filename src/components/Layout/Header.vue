@@ -9,6 +9,17 @@
 
         <v-spacer></v-spacer>
 
+        <v-toolbar-items>
+            <v-btn
+                @click="$router.push({name: 'PublicTestIndexPage'})"
+                text
+            >
+                {{ $t('MAIN_TOOLBAR_ITEMS.TESTS') }}
+            </v-btn>
+        </v-toolbar-items>
+
+        <v-spacer></v-spacer>
+
         <v-menu bottom offset-y>
             <template v-slot:activator="{ on }">
                 <v-btn

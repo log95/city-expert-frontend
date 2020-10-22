@@ -5,7 +5,7 @@
             dark
             absolute
     >
-        <v-toolbar-title>{{ $t('MAIN_TOOLBAR_TITLE') }}</v-toolbar-title>
+        <v-toolbar-title>{{ $t('APP_NAME') }}</v-toolbar-title>
 
         <v-spacer></v-spacer>
 

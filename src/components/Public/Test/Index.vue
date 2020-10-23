@@ -1,13 +1,17 @@
 <template>
     <div>
-        <v-container fluid>
+        <div v-if="!isAuthorized()">
+            <div><a :href="$router.resolve({'name': 'LoginRegister'}).href">{{ $t('LOGIN_OR_REGISTER') }}</a> {{ $t('LOGIN_FOR_SHOW_TESTS') }}</div>
+        </div>
+        <v-container v-else fluid>
             <v-data-iterator
                     :items="this.tests"
                     :items-per-page.sync="itemsPerPage"
                     :page="page"
                     hide-default-footer
                     :loading="isLoadingItems"
-                    loading-text="Loading..."
+                    :loading-text="$t('LOADING')"
+                    :no-data-text="$t('NO_TESTS_FOUND_BY_QUERY')"
             >
                 <template v-slot:header>
                     <v-toolbar
@@ -22,7 +26,7 @@
                                     solo-inverted
                                     hide-details
                                     :items="filterStatusKeys"
-                                    label="Filter Status"
+                                    :label="$t('STATUS')"
                                     @change="loadTests"
                                     clearable
                             ></v-select>
@@ -33,7 +37,7 @@
                                     solo-inverted
                                     hide-details
                                     :items="filterCityKeys"
-                                    label="Filter city"
+                                    :label="$t('CITY')"
                                     @change="loadTests"
                             ></v-select>
                             <v-spacer></v-spacer>
@@ -43,7 +47,7 @@
                                     solo-inverted
                                     hide-details
                                     :items="sortKeys"
-                                    label="Sort by"
+                                    :label="$t('SORT')"
                                     @change="loadTests"
                                     clearable
                             ></v-select>
@@ -84,13 +88,13 @@
                     </v-row>
                 </template>
 
-                <template v-slot:footer>
+                <template v-slot:footer v-if="tests.length">
                     <v-row align="center" justify="center">
                         <span
                                 class="mr-4
                                 grey--text"
                         >
-                            Page {{ page }} of {{ numberOfPages }}
+                            {{ $t('PAGE_NUMBER_FROM_PAGES_NUMBER', {'current_num': page, 'total_num': numberOfPages}) }}
                         </span>
                         <v-btn
                                 fab
@@ -119,7 +123,6 @@
 </template>
 
 <script>
-    import api from '@/api';
     import qs from 'qs';
     import ListItem from '@/components/Public/Test/ListItem';
     import TestStatus from "@/enum/TestStatus";
@@ -129,28 +132,29 @@
         components: {
             ListItem,
         },
-        data: () =>({
-            isLoadingItems: true,
-            tests: [],
-            totalTestsCount: 0,
-            isLoading: false, // TODO:
-            page: 1,
-            sortDirection: '',
-            sortKeys: [
-                {text: 'Publish date', value: 'published_at'},
-                {text: 'Likes', value: 'likes'},
-            ],
-            filterStatusKeys: [
-                {text: 'In process', value: TestStatus.IN_PROCESS},
-                {text: 'Correct answer', value: TestStatus.CORRECT_ANSWER},
-                {text: 'Show answer', value: TestStatus.SHOW_ANSWER},
-            ],
-            filterStatus: '',
-            filterCityKeys: [],
-            filterCity: '',
-            itemsPerPage: 10,
-            sortBy: '',
-        }),
+        data: function () {
+            return {
+                isLoadingItems: true,
+                tests: [],
+                totalTestsCount: 0,
+                page: 1,
+                sortDirection: null,
+                sortKeys: [
+                    {text: this.$t('SORT_BY_PUBLISH_DATA'), value: 'published_at'},
+                    {text: this.$t('SORT_BY_LIKES'), value: 'likes'},
+                ],
+                filterStatusKeys: [
+                    {text: this.$t('TEST_STATUS.in_process'), value: TestStatus.IN_PROCESS},
+                    {text: this.$t('TEST_STATUS.correct_answer'), value: TestStatus.CORRECT_ANSWER},
+                    {text: this.$t('TEST_STATUS.show_answer'), value: TestStatus.SHOW_ANSWER},
+                ],
+                filterStatus: null,
+                filterCityKeys: [],
+                filterCity: null,
+                itemsPerPage: 10,
+                sortBy: null,
+            }
+        },
         computed: {
             numberOfPages () {
                 return Math.ceil(this.totalTestsCount / this.itemsPerPage)
@@ -171,14 +175,14 @@
                 this.isLoadingItems = true;
                 this.tests = [];
 
-                api.get('tests', {
+                this.$api.get('tests', {
                     params: {
                         page: this.page,
                         per_page: this.itemsPerPage,
-                        sort_by: this.sortBy ? this.sortBy : '',
+                        sort_by: this.sortBy,
                         sort_direction: this.sortDirection,
                         filter_by: {
-                            status: this.filterStatus ? this.filterStatus : '',
+                            status: this.filterStatus,
                             city_id: this.filterCity,
                         },
                     },
@@ -194,6 +198,23 @@
                     })
                     .finally(() => this.isLoadingItems = false)
             },
+            loadCities () {
+                this.$api.get('cities')
+                    .then(response => {
+                        let self = this;
+
+                        response.data.map(function (city) {
+                            self.filterCityKeys.push({
+                                text: self.$t('CITIES.' + city['name']),
+                                value: city['id'],
+                            });
+                        });
+                    })
+                    .catch(error => {
+                        alert('Error');
+                        console.log(error.response);
+                    });
+            },
         },
         watch: {
             page: function () {
@@ -201,25 +222,13 @@
             }
         },
         created() {
-            api.get('cities')
-                .then(response => {
-                    let self = this;
+            if (!this.isAuthorized()) {
+                return;
+            }
 
-                    response.data.map(function (city) {
-                        self.filterCityKeys.push({
-                            text: self.$t('CITY.' + city['name']),
-                            value: city['id'],
-                        });
-                    });
+            this.loadTests();
 
-                    this.filterCity = this.filterCityKeys[0]['value'];
-
-                    this.loadTests();
-                })
-                .catch(error => {
-                    alert('Error');
-                    console.log(error.response);
-                });
+            this.loadCities();
         }
     }
 </script>

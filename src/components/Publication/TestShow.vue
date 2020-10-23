@@ -29,7 +29,7 @@
 
                         <v-text-field
                                 :label="$t('TEST.CITY')"
-                                :value="test ? $t('CITY.' + test.city['name']) : ''"
+                                :value="test ? $t('CITIES.' + test.city['name']) : ''"
                                 disabled
                         ></v-text-field>
 

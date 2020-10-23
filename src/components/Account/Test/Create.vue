@@ -170,7 +170,7 @@
 
                     response.data.map(function (city) {
                         self.cities.push({
-                            text: self.$t('CITY.' + city['name']),
+                            text: self.$t('CITIES.' + city['name']),
                             value: city['id'],
                         });
                     });

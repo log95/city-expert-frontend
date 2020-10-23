@@ -34,7 +34,7 @@
             <v-list>
 
                 <v-list-item
-                        v-if="!isAuthorized"
+                        v-if="!isAuthorized()"
                         @click="$router.push({name: 'LoginRegister'})"
                 >
                     <v-list-item-icon>
@@ -46,7 +46,7 @@
                 </v-list-item>
 
                 <v-list-item
-                        v-if="isAuthorized"
+                        v-if="isAuthorized()"
                         @click="$router.push({name: 'AccountTestIndexPage'})"
                 >
                     <v-list-item-icon>
@@ -58,14 +58,14 @@
                 </v-list-item>
 
                 <v-list-item
-                        v-if="isAuthorized"
+                        v-if="isAuthorized()"
                         @click="logout"
                 >
                     <v-list-item-icon>
                         <v-icon>mdi-logout</v-icon>
                     </v-list-item-icon>
                     <v-list-item-content>
-                        <v-list-item-title>Выйти</v-list-item-title>
+                        <v-list-item-title>{{ $t('HEADER_TOOLBAR.LOGOUT') }}</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
 
@@ -78,11 +78,6 @@
 <script>
     export default {
         name: 'LayoutHeader',
-        computed: {
-            isAuthorized: function () {
-                return localStorage.getItem('JWT_TOKEN') !== null;
-            },
-        },
         methods: {
             logout: function () {
                 window.localStorage.removeItem('JWT_TOKEN');

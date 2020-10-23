@@ -176,7 +176,7 @@
 
                 this.cities = response.data.map(function (city) {
                     return {
-                        text: self.$t('CITY.' + city['name']),
+                        text: self.$t('CITIES.' + city['name']),
                         value: city['id'],
                     };
                 });

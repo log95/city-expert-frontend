@@ -88,33 +88,35 @@
                     </v-row>
                 </template>
 
-                <template v-slot:footer v-if="tests.length">
-                    <v-row align="center" justify="center">
-                        <span
-                                class="mr-4
-                                grey--text"
-                        >
-                            {{ $t('PAGE_NUMBER_FROM_PAGES_NUMBER', {'current_num': page, 'total_num': numberOfPages}) }}
-                        </span>
-                        <v-btn
-                                fab
-                                dark
-                                color="blue darken-3"
-                                class="mr-1"
-                                @click="formerPage"
-                        >
-                            <v-icon>mdi-chevron-left</v-icon>
-                        </v-btn>
-                        <v-btn
-                                fab
-                                dark
-                                color="blue darken-3"
-                                class="ml-1"
-                                @click="nextPage"
-                        >
-                            <v-icon>mdi-chevron-right</v-icon>
-                        </v-btn>
-                    </v-row>
+                <template v-slot:footer="props">
+                    <template v-if="props.items.length">
+                        <v-row align="center" justify="center">
+                            <span
+                                    class="mr-4
+                                    grey--text"
+                            >
+                                {{ $t('PAGE_NUMBER_FROM_PAGES_NUMBER', {'current_num': page, 'total_num': numberOfPages}) }}
+                            </span>
+                            <v-btn
+                                    fab
+                                    dark
+                                    color="blue darken-3"
+                                    class="mr-1"
+                                    @click="formerPage"
+                            >
+                                <v-icon>mdi-chevron-left</v-icon>
+                            </v-btn>
+                            <v-btn
+                                    fab
+                                    dark
+                                    color="blue darken-3"
+                                    class="ml-1"
+                                    @click="nextPage"
+                            >
+                                <v-icon>mdi-chevron-right</v-icon>
+                            </v-btn>
+                        </v-row>
+                    </template>
                 </template>
 
             </v-data-iterator>

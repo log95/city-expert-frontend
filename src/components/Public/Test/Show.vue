@@ -19,7 +19,7 @@
                         class="float-left"
                 >
                     <v-icon small>mdi-arrow-left</v-icon>
-                    <span>К списку</span>
+                    <span>{{ $t('TO_TEST_LIST') }}</span>
                 </v-btn>
                 <TestStatusBadge :status="test.status"></TestStatusBadge>
             </div>
@@ -63,13 +63,13 @@
                                 v-model="userAnswer"
                                 append-outer-icon="mdi-send"
                                 clearable
-                                label="Введите ответ"
+                                :label="$t('INPUT_ANSWER')"
                                 @click:append-outer="checkAnswer"
                                 @click:clear="clearAnswer"
                         ></v-text-field>
                         <v-text-field
                             v-else
-                            label="Ответ"
+                            :label="$t('ANSWER')"
                             :value="test.answer"
                             readonly
                         ></v-text-field>
@@ -85,7 +85,7 @@
                                 <v-tooltip bottom>
                                     <template v-slot:activator="{ on }">
                                         <v-expansion-panel-header v-on="hint.isAccessible ? '' : on" disable-icon-rotate>
-                                            Подсказка №{{ key + 1 }}
+                                            {{ $t('HINT_NUM', {'num': key + 1}) }}
                                             <template v-slot:actions>
                                                 <v-icon
                                                         v-if="hint.isAccessible"
@@ -120,7 +120,7 @@
                                         @click="showAnswer"
                                 >
                                     <v-icon left dark>mdi-key</v-icon>
-                                    Посмотреть ответ
+                                    {{ $t('SHOW_ANSWER') }}
                                 </v-btn>
                             </template>
                             <span>{{ showAnswerPointsText}}</span>

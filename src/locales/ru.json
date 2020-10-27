@@ -84,5 +84,9 @@
   "SORT_BY_PUBLISH_DATA": "По дате создания",
   "SORT_BY_LIKES": "По популярности",
   "NO_TESTS_FOUND_BY_QUERY": "По данному запросу тесты не найдены.",
-  "PAGE_NUMBER_FROM_PAGES_NUMBER": "Страница {current_num} из {total_num}"
+  "PAGE_NUMBER_FROM_PAGES_NUMBER": "Страница {current_num} из {total_num}",
+  "TO_TEST_LIST": "К списку",
+  "INPUT_ANSWER": "Введите ответ",
+  "ANSWER": "Ответ",
+  "SHOW_ANSWER": "Посмотреть ответ"
 }

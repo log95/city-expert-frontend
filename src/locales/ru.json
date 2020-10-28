@@ -88,5 +88,6 @@
   "TO_TEST_LIST": "К списку",
   "INPUT_ANSWER": "Введите ответ",
   "ANSWER": "Ответ",
-  "SHOW_ANSWER": "Посмотреть ответ"
+  "SHOW_ANSWER": "Посмотреть ответ",
+  "WRONG_ANSWER": "Неверно"
 }

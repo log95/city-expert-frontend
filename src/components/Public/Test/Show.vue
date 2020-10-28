@@ -157,23 +157,14 @@
                 </v-row>
             </v-container>
         </div>
-
-        <v-snackbar
-                v-model="isSnackbar"
-                :timeout="snackbarTimeout"
-                :color="snackbarColor"
-        >
-            {{ snackbarText }}
-        </v-snackbar>
-
     </div>
 </template>
 
 <script>
-    import api from '@/api';
     import PointsMap from '@/enum/PointsMap';
     import TestStatusBadge from '@/components/Public/Test/TestStatusBadge';
     import TestStatus from "../../../enum/TestStatus";
+    import { mapMutations } from 'vuex';
 
     export default {
         name: 'PublicTestShow',
@@ -185,10 +176,6 @@
             userAnswer: '',
             hints: [],
             isLoading: true,
-            isSnackbar: false,
-            snackbarText: '',
-            snackbarColor: '',
-            snackbarTimeout: null,
             isInterestLoading: false,
         }),
         computed: {
@@ -200,8 +187,12 @@
             },
         },
         methods: {
+            ...mapMutations({
+                addNotification: 'snackbar/addNotification',
+            }),
+
             checkAnswer: function () {
-                api.
+                this.$api.
                     post('tests/' + this.test.id + '/answer/', {
                         answer: this.userAnswer,
                     })
@@ -211,9 +202,15 @@
                             this.test.status = TestStatus.CORRECT_ANSWER;
                             this.makeAllHintsAvailable();
 
-                            this.showNotice(this.$t('POINTS_NOTICE.CORRECT_ANSWER', {points: PointsMap.CORRECT_ANSWER}), 'success', 3000);
+                            this.addNotification({
+                                'text': this.$t('POINTS_NOTICE.CORRECT_ANSWER', {points: PointsMap.CORRECT_ANSWER}),
+                                'color': 'success',
+                            });
                         } else {
-                            this.showNotice('Неверно', 'error');
+                            this.addNotification({
+                                'text': this.$t('WRONG_ANSWER'),
+                                'color': 'error',
+                            });
                         }
                     })
                     .catch(error => {
@@ -222,13 +219,16 @@
                     })
             },
             showAnswer: function () {
-                api.get('tests/' + this.test.id + '/answer/')
+                this.$api.get('tests/' + this.test.id + '/answer/')
                     .then(response => {
                         this.$set(this.test, 'answer', response.data.answer);
                         this.test.status = TestStatus.SHOW_ANSWER;
                         this.makeAllHintsAvailable();
 
-                        this.showNotice(this.$t('POINTS_NOTICE.SHOW_ANSWER', {points: PointsMap.SHOW_ANSWER}), 'orange', 3000);
+                        this.addNotification({
+                            'text': this.$t('POINTS_NOTICE.SHOW_ANSWER', {points: PointsMap.SHOW_ANSWER}),
+                            'color': 'orange',
+                        });
                     })
                     .catch(error => {
                         alert('Error');
@@ -247,12 +247,15 @@
                     return;
                 }
 
-                api.get('hints/' + hint.id + '/')
+                this.$api.get('hints/' + hint.id + '/')
                     .then(response => {
                         this.hints[indexArray]['text'] = response.data.text;
 
                         if (!hint['isAccessible']) {
-                            this.showNotice(this.$t('POINTS_NOTICE.HINT', {points: PointsMap.SHOW_HINT}), 'orange');
+                            this.addNotification({
+                                'text': this.$t('POINTS_NOTICE.HINT', {points: PointsMap.SHOW_HINT}),
+                                'color': 'orange',
+                            });
                             this.hints[indexArray]['isAccessible'] = true;
                         }
                     })
@@ -264,7 +267,7 @@
             loadTest: function () {
                 this.isLoading = true;
 
-                api.get('tests/' + this.$route.params['test_id'] + '/')
+                this.$api.get('tests/' + this.$route.params['test_id'] + '/')
                     .then(response => {
                         this.hints = response.data.hints.all_ids.map(function (hintId) {
                             return {
@@ -286,8 +289,8 @@
                 this.isInterestLoading = true;
 
                 if (this.test.interest.current_user_liked !== isLikeAction) {
-                    api
-                        .post('test_interests/' + this.test.id + '/', {
+                    this.$api
+                        .post('tests/' + this.test.id + '/interest/', {
                             is_liked: isLikeAction,
                         })
                         .then(() => {
@@ -303,7 +306,7 @@
                         })
                         .finally(() => this.isInterestLoading = false);
                 } else {
-                    api.delete('test_interests/' + this.test.id + '/')
+                    this.$api.delete('tests/' + this.test.id + '/interest/')
                         .then(() => {
                             this.test.interest.current_user_liked = null;
                             isLikeAction ? this.test.interest.likes_count-- : this.test.interest.dislikes_count--;
@@ -314,12 +317,6 @@
                         })
                         .finally(() => this.isInterestLoading = false);
                 }
-            },
-            showNotice: function (text, color, timeout = 1200) {
-                this.snackbarText = text;
-                this.snackbarColor = color;
-                this.snackbarTimeout = timeout;
-                this.isSnackbar = true;
             },
         },
         created: function () {

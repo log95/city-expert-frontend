@@ -18,13 +18,13 @@
         <span>{{ $t('TEST_PUBLISH_STATUS.ON_CORRECTION') }}</span>
     </v-chip>
     <v-chip
-            v-else-if="this.isApproved"
+            v-else-if="this.isPublished"
             class="ma-2"
             color="success"
             label
     >
         <v-icon left small>mdi-check</v-icon>
-        <span>{{ $t('TEST_PUBLISH_STATUS.APPROVED') }}</span>
+        <span>{{ $t('TEST_PUBLISH_STATUS.PUBLISHED') }}</span>
     </v-chip>
 </template>
 
@@ -42,8 +42,8 @@
             isOnCorrection: function () {
                 return this.status === TestPublishStatus.ON_CORRECTION;
             },
-            isApproved: function () {
-                return this.status === TestPublishStatus.APPROVED;
+            isPublished: function () {
+                return this.status === TestPublishStatus.PUBLISHED;
             },
         },
     };

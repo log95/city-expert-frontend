@@ -53,7 +53,7 @@
 
                     this.isShowToolbar = false;
 
-                    this.test.status = TestPublishStatus.APPROVED;
+                    this.test.status = TestPublishStatus.PUBLISHED;
 
                     this.addNotification({
                         'text': this.$t('MODERATION_TEST.APPROVE_SUBMITTED'),

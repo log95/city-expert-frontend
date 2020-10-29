@@ -76,7 +76,7 @@
   "TEST_PUBLISH_STATUS": {
     "REVIEWED": "На проверке",
     "ON_CORRECTION": "На корректировке",
-    "APPROVED": "Одобрен"
+    "PUBLISHED": "Опубликован"
   },
   "LOGIN_OR_REGISTER": "Войдите или зарегистрируйтесь",
   "LOGIN_FOR_SHOW_TESTS": "для просмотра тестов.",

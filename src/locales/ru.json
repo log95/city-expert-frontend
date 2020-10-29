@@ -89,5 +89,6 @@
   "INPUT_ANSWER": "Введите ответ",
   "ANSWER": "Ответ",
   "SHOW_ANSWER": "Посмотреть ответ",
-  "WRONG_ANSWER": "Неверно"
+  "WRONG_ANSWER": "Неверно",
+  "ADD_TEST": "Добавить тест"
 }

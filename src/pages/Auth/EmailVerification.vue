@@ -3,7 +3,7 @@
 </template>
 
 <script>
-    import EmailVerification from "../../components/LoginRegister/EmailVerification";
+    import EmailVerification from "../../components/Auth/EmailVerification";
 
     export default {
         name: 'EmailVerificationPage',

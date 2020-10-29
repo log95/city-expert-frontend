@@ -3,7 +3,7 @@
 </template>
 
 <script>
-    import LoginRegisterForm from "../../components/LoginRegister/LoginRegisterForm";
+    import LoginRegisterForm from "../../components/Auth/LoginRegisterForm";
 
     export default {
         name: 'LoginRegisterPage',

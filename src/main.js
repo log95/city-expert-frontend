@@ -30,7 +30,9 @@ api.interceptors.response.use(
 
 Vue.mixin(authMixin);
 
-new Vue({
+store.$api = api;
+
+const app = new Vue({
   store,
   render: h => h(App),
   vuetify,

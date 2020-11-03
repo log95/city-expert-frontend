@@ -92,5 +92,8 @@
   "ANSWER": "Ответ",
   "SHOW_ANSWER": "Посмотреть ответ",
   "WRONG_ANSWER": "Неверно",
-  "ADD_TEST": "Добавить тест"
+  "ADD_TEST": "Добавить тест",
+  "TEST_CREATION": "Создание теста",
+  "IMAGE": "Изображение",
+  "IMAGE_SIZE_SHOULD_LESS_THAN": "Размер файла должен быть менее {num} Мб"
 }

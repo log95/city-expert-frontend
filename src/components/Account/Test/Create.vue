@@ -1,17 +1,5 @@
 <template>
     <div>
-        <div class="d-flex justify-space-between mb-6">
-            <v-btn
-                    @click="$router.push({name: 'AccountTestIndexPage'})"
-                    text
-                    color="primary"
-                    class="float-left"
-            >
-                <v-icon small>mdi-arrow-left</v-icon>
-                <span>К списку</span>
-            </v-btn>
-        </div>
-
         <div v-if="isSuccessSubmitted">
             <v-alert type="success">
                 {{ $t('TEST_CREATE.SUCCESS_CREATED') }}
@@ -19,7 +7,7 @@
         </div>
 
         <div v-else>
-            <h2 class="text-center">Создание теста</h2>
+            <h2 class="text-center">{{ $t('TEST_CREATION') }}</h2>
 
             <v-row justify="center">
                 <v-col cols="12" sm="10" md="8" lg="6">
@@ -27,10 +15,11 @@
                         <v-card-text>
                             <v-form v-model="isValid">
                                 <v-select
-                                        :loading="cityId === null"
-                                        label="Город"
+                                        :loading="citySelectItems.length === 0"
+                                        :label="$t('CITY')"
                                         v-model="cityId"
-                                        :items="cities"
+                                        :items="citySelectItems"
+                                        :rules="[rules.required]"
                                 ></v-select>
 
                                 <v-text-field
@@ -51,7 +40,7 @@
                                         v-model="image"
                                         :rules="[rules.required, rules.fileMaxSize]"
                                         accept="image/*"
-                                        label="Изображение"
+                                        :label="$t('IMAGE')"
                                 ></v-file-input>
 
                                 <div>{{ $t('TEST.HINTS') }}</div>
@@ -61,7 +50,7 @@
                                             :key="index"
                                             v-model="hints[index]"
                                             :label="$t('HINT_NUM', {num: index + 1})"
-                                            :rules="[rules.hintMax]"
+                                            :rules="[rules.required, rules.hintMax]"
                                             append-outer-icon="mdi-close"
                                             @click:append-outer="removeHint(index)"
                                     ></v-text-field>
@@ -107,40 +96,50 @@
 </template>
 
 <script>
-    import api from '@/api';
+    import { mapActions, mapState } from 'vuex';
 
     export default {
         name: 'AccountTestCreate',
-        data: () => ({
-            isSuccessSubmitted: false,
-            isValid: false,
-            isSavingForm: false,
-            cities: [],
-            cityId: null,
-            question: '',
-            answer: '',
-            image: null,
-            rules: {
-                required: v => !!v || "Required",
-                questionMax: v => (v && v.length < 255) || "Max 255 characters",
-                answerMax: v => (v && v.length < 255) || "Max 255 characters",
-                hintMax: v => (v && v.length < 255) || "Max 255 characters",
-                fileMaxSize: value => !value || value.size < 5000000 || 'Image size should be less than 5 MB!',
-            },
-            hints: [],
-        }),
+        data: function () {
+            return {
+                isSuccessSubmitted: false,
+                isValid: false,
+                isSavingForm: false,
+                citySelectItems: [],
+                cityId: null,
+                question: '',
+                answer: '',
+                image: null,
+                rules: {
+                    required: v => !!v || this.$t('REQUIRED_FIELD'),
+                    questionMax: v => (v && v.length < 255) || this.$t('MAX_FIELD', {num: 255}),
+                    answerMax: v => (v && v.length < 255) || this.$t('MAX_FIELD', {num: 255}),
+                    hintMax: v => (v && v.length < 255) || this.$t('MAX_FIELD', {num: 255}),
+                    fileMaxSize: value => !value || value.size < 5000000 || this.$t('IMAGE_SIZE_SHOULD_LESS_THAN', {num: 5}),
+                },
+                hints: [],
+            }
+        },
+        computed: {
+            ...mapState('cities', {
+                cities: 'cities',
+            }),
+        },
         methods: {
+            ...mapActions({
+                loadCities: 'cities/loadList',
+            }),
             async saveTest () {
                 this.isSavingForm = true;
 
                 try {
-                    let response = await api.post('files/', this.image, {
+                    let response = await this.$api.post('files/', this.image, {
                         headers: {
                             'Content-Type': this.image.type,
                         }
                     });
 
-                    await api.post('account/tests/', {
+                    await this.$api.post('account/tests/', {
                         question: this.question,
                         answer: this.answer,
                         city_id: this.cityId,
@@ -163,24 +162,20 @@
                 this.hints.splice(index, 1);
             },
         },
-        created() {
-            api.get('cities')
-                .then(response => {
-                    let self = this;
+        watch: {
+            cities: function () {
+                let self = this;
 
-                    response.data.map(function (city) {
-                        self.cities.push({
-                            text: self.$t('CITIES.' + city['name']),
-                            value: city['id'],
-                        });
+                this.cities.map(function (city) {
+                    self.citySelectItems.push({
+                        text: self.$t('CITIES.' + city['name']),
+                        value: city['id'],
                     });
-
-                    this.cityId = this.cities[0]['value'];
-                })
-                .catch(error => {
-                    alert('Error');
-                    console.log(error.response);
                 });
+            },
+        },
+        created() {
+            this.loadCities();
         },
     }
 </script>

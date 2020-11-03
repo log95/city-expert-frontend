@@ -1,20 +1,25 @@
-const apiAccountTests = 'account/tests';
+const queryPrefix = 'account/tests';
 
 const state = {
-    tests: null,
+    tests: [],
+    count: 0,
 };
 
 const mutations = {
-    save: function (state, tests) {
+    setTests: function (state, tests) {
         state.tests = tests;
     },
+    setCount: function (state, count) {
+        state.count = count;
+    }
 };
 
 const actions = {
-    async load({ commit }) {
-        const resp = await this.$api.get(apiAccountTests);
+    async loadList({ commit }, params) {
+        const response = await this.$api.get(queryPrefix, params);
 
-        commit('save', resp.data.tests);
+        commit('setTests', response.data.tests);
+        commit('setCount', response.data.count);
     }
 };
 

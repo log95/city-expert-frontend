@@ -6,7 +6,7 @@
             label
     >
         <v-icon left small>mdi-timer-sand-empty</v-icon>
-        <span>{{ $t('TEST_PUBLISH_STATUS.REVIEWED') }}</span>
+        <span>{{ $t('TEST_PUBLISH_STATUS.reviewed') }}</span>
     </v-chip>
     <v-chip
             v-else-if="this.isOnCorrection"
@@ -15,7 +15,7 @@
             label
     >
         <v-icon left small>mdi-pencil</v-icon>
-        <span>{{ $t('TEST_PUBLISH_STATUS.ON_CORRECTION') }}</span>
+        <span>{{ $t('TEST_PUBLISH_STATUS.on_correction') }}</span>
     </v-chip>
     <v-chip
             v-else-if="this.isPublished"
@@ -24,7 +24,7 @@
             label
     >
         <v-icon left small>mdi-check</v-icon>
-        <span>{{ $t('TEST_PUBLISH_STATUS.PUBLISHED') }}</span>
+        <span>{{ $t('TEST_PUBLISH_STATUS.published') }}</span>
     </v-chip>
 </template>
 

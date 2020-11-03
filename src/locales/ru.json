@@ -74,15 +74,17 @@
     "EMPTY_MESSAGE_ON_MODERATOR_REJECT": "При отклонении нужно оставить как минимум одно сообщение."
   },
   "TEST_PUBLISH_STATUS": {
-    "REVIEWED": "На проверке",
-    "ON_CORRECTION": "На корректировке",
-    "PUBLISHED": "Опубликован"
+    "reviewed": "На проверке",
+    "on_correction": "На корректировке",
+    "published": "Опубликован"
   },
   "LOGIN_OR_REGISTER": "Войдите или зарегистрируйтесь",
   "LOGIN_FOR_SHOW_TESTS": "для просмотра тестов.",
   "SORT": "Сортировка",
   "SORT_BY_PUBLISH_DATA": "По дате создания",
   "SORT_BY_LIKES": "По популярности",
+  "SORT_BY_CREATED_AT": "По дате создания",
+  "SORT_BY_UPDATED_AT": "По дате обновления",
   "NO_TESTS_FOUND_BY_QUERY": "По данному запросу тесты не найдены.",
   "PAGE_NUMBER_FROM_PAGES_NUMBER": "Страница {current_num} из {total_num}",
   "TO_TEST_LIST": "К списку",

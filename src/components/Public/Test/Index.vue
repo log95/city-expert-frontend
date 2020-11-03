@@ -39,6 +39,7 @@
                                     :items="filterCityKeys"
                                     :label="$t('CITY')"
                                     @change="loadTests"
+                                    clearable
                             ></v-select>
                             <v-spacer></v-spacer>
                             <v-select

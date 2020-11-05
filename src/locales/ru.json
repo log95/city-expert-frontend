@@ -62,9 +62,10 @@
   "CANCEL_BTN": "Отменить",
   "SAVE_AND_SEND_BTN": "Сохранить и отправить",
   "HINT_NUM": "Подсказка №{num}",
-  "TEST_CREATE": {
+  "TEST_CREATE_UPDATE": {
     "ADD_HINT": "Добавить",
-    "SUCCESS_CREATED": "Тест успешно создан. После проверки модератором вы получите уведомление."
+    "SUCCESS_CREATED": "Тест успешно создан. После проверки модератором вы получите уведомление.",
+    "SUCCESS_UPDATED": "Тест успешно обновлён и отправлен на проверку. После проверки модератором вы получите уведомление."
   },
   "MODERATION_TEST": {
     "APPROVE_BTN": "Одобрить",
@@ -95,5 +96,13 @@
   "ADD_TEST": "Добавить тест",
   "TEST_CREATION": "Создание теста",
   "IMAGE": "Изображение",
-  "IMAGE_SIZE_SHOULD_LESS_THAN": "Размер файла должен быть менее {num} Мб"
+  "CHANGE_IMAGE": "Сменить изображение",
+  "IMAGE_SIZE_SHOULD_LESS_THAN": "Размер файла должен быть менее {num} Мб",
+  "TEST_NUM": "Тест №{id}",
+  "UPDATE_TEST_NUM": "Обновление теста №{id}",
+  "COMMENTS": "Комментарии",
+  "TEST_PUBLISHING_ACTIONS": {
+    "TO_CORRECTION": "Вернуть на корректировку",
+    "UPDATE": "Обновить"
+  }
 }

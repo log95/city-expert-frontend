@@ -7,7 +7,7 @@
             color="primary"
             text
         >
-            Вернуть на корректировку
+            {{ $t('TEST_PUBLISHING_ACTIONS.TO_CORRECTION') }}
         </v-btn>
 
         <v-btn
@@ -17,14 +17,13 @@
             color="primary"
             text
         >
-            Обновить
+            {{ $t('TEST_PUBLISHING_ACTIONS.UPDATE') }}
         </v-btn>
     </v-card-actions>
 </template>
 
 <script>
     import TestPublishStatus from '@/enum/TestPublishStatus';
-    import api from '@/api';
 
     export default {
         name: 'AccountTestShowToolbar',
@@ -45,7 +44,7 @@
         methods: {
             async returnOnCorrection() {
                 try {
-                    await api.patch('account/tests/' + this.test.id + '/to-correction/');
+                    await this.$api.patch('account/tests/' + this.test.id + '/to-correction/');
 
                     this.$router.push({name: 'AccountTestUpdatePage', params: { test_id: this.test.id }});
                 } catch (error) {

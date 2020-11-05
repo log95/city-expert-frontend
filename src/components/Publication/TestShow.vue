@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2 class="text-center">Тест №{{ $route.params['test_id'] }}</h2>
+        <h2 class="text-center">{{ $t('TEST_NUM', {'id': $route.params['test_id']}) }}</h2>
         <v-row justify="center">
             <v-col cols="12" sm="10" md="8" lg="6">
                 <v-card ref="form">
@@ -46,7 +46,7 @@
                         <br><br>
 
                         <div v-if="test">
-                            <div>Чат</div>
+                            <div>{{ $t('COMMENTS') }}</div>
                             <Chat
                                     :chatId="test.chat_id"
                                     :isViewByCreator="isViewByCreator"
@@ -70,7 +70,6 @@
 </template>
 
 <script>
-    import api from '@/api';
     import Chat from '@/components/Chat/Chat';
     import StatusBadge from "@/components/Publication/TestStatusBadge";
 
@@ -87,14 +86,8 @@
             'isViewByCreator',
         ],
         async created() {
-            try {
-                let response = await api.get('publication/tests/' + this.$route.params['test_id'] + '/');
-
-                this.test = response.data;
-            } catch (error) {
-                alert('Error');
-                console.log(error.response);
-            }
+            let response = await this.$api.get('publication/tests/' + this.$route.params['test_id'] + '/');
+            this.test = response.data;
         },
     }
 </script>

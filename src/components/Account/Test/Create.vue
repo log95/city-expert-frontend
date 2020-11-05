@@ -2,7 +2,7 @@
     <div>
         <div v-if="isSuccessSubmitted">
             <v-alert type="success">
-                {{ $t('TEST_CREATE.SUCCESS_CREATED') }}
+                {{ $t('TEST_CREATE_UPDATE.SUCCESS_CREATED') }}
             </v-alert>
         </div>
 
@@ -61,7 +61,7 @@
                                             small
                                     >
                                         <v-icon left>mdi-plus</v-icon>
-                                        {{ $t('TEST_CREATE.ADD_HINT') }}
+                                        {{ $t('TEST_CREATE_UPDATE.ADD_HINT') }}
                                     </v-btn>
                                 </div>
                             </v-form>
@@ -105,6 +105,7 @@
                 isSuccessSubmitted: false,
                 isValid: false,
                 isSavingForm: false,
+
                 citySelectItems: [],
                 cityId: null,
                 question: '',

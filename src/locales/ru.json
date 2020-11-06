@@ -104,5 +104,6 @@
   "TEST_PUBLISHING_ACTIONS": {
     "TO_CORRECTION": "Вернуть на корректировку",
     "UPDATE": "Обновить"
-  }
+  },
+  "WRONG_CREDENTIALS": "Неверный email или пароль"
 }

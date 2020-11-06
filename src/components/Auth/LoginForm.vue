@@ -32,7 +32,7 @@
 </template>
 
 <script>
-    import api from '@/api';
+    import { mapMutations } from 'vuex';
 
     export default {
         name: 'LoginForm',
@@ -51,25 +51,43 @@
             }
         },
         methods: {
-            sendForm: function () {
+            ...mapMutations({
+                addNotification: 'snackbar/addNotification',
+            }),
+            async sendForm() {
                 this.isLoading = true;
 
-                api
-                    .post('account/login/', {
+                try {
+                    let response = await this.$api.post('account/login/', {
                         'username': this.email,
                         'password': this.password,
-                    })
-                    .then(response => {
-                        localStorage.setItem('JWT_TOKEN', response.data.token);
+                    });
 
-                        let startPage = this.$router.resolve({'name': 'StartPage'});
-                        window.location.href = startPage.href;
-                    })
-                    .catch(error => {
+                    localStorage.setItem('JWT_TOKEN', response.data.token);
+
+                    response = await this.$api.get('account/user', {
+                        headers: {
+                            'Authorization': 'Bearer ' + response.data.token,
+                        },
+                    });
+
+                    localStorage.setItem('USER', JSON.stringify(response.data));
+
+                    let startPage = this.$router.resolve({'name': 'StartPage'});
+                    window.location.href = startPage.href;
+                } catch (error) {
+                    if (error.response.status === 401) {
+                        this.addNotification({
+                            'text': this.$t('WRONG_CREDENTIALS'),
+                            'color': 'error',
+                        });
+                    } else {
                         alert('Error');
-                        console.log(error.response);
-                    })
-                    .finally(() => this.isLoading = false)
+                        console.log(error);
+                    }
+                }
+
+                this.isLoading = false;
             }
         },
     }

@@ -10,27 +10,9 @@ import authMixin from './mixins/auth'
 Vue.config.productionTip = false;
 
 Vue.prototype.$api = api;
-
-// Login page if user is not authorized.
-api.interceptors.response.use(
-  response => {
-    return response;
-  },
-  error => {
-    if (error.response.status === 401) {
-      window.localStorage.removeItem('JWT_TOKEN');
-
-      let loginPage = router.resolve({'name': 'LoginRegister'});
-      window.location.href = loginPage.href;
-    }
-
-    return error;
-  },
-);
+store.$api = api;
 
 Vue.mixin(authMixin);
-
-store.$api = api;
 
 const app = new Vue({
   store,

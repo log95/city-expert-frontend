@@ -6,7 +6,12 @@ export default {
             return localStorage.getItem('JWT_TOKEN') !== null;
         },
         isModerator() {
-            const roles = JSON.parse(localStorage.getItem('USER')).roles;
+            const user = localStorage.getItem('USER');
+            if (!user) {
+                return false;
+            }
+
+            const roles = JSON.parse(user).roles;
 
             return roles.includes(UserRole.MODERATOR);
         },

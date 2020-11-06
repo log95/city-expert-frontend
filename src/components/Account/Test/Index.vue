@@ -164,7 +164,6 @@
                 return Math.ceil(this.totalTestsCount / this.itemsPerPage)
             },
         },
-
         methods: {
             ...mapActions({
                 loadAccountTests: 'accountTests/loadList',

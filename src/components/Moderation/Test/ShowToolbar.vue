@@ -17,13 +17,12 @@
                 color="success"
                 text
         >
-            {{ $t('MODERATION_TEST.APPROVE_BTN') }}
+            {{ $t('MODERATION_TEST.PUBLISH_BTN') }}
         </v-btn>
     </v-card-actions>
 </template>
 
 <script>
-    import api from '@/api';
     import TestPublishStatus from '@/enum/TestPublishStatus';
     import { mapMutations } from 'vuex';
 
@@ -38,7 +37,7 @@
         ],
         computed: {
             isStatusReviewed: function () {
-                return this.test.status === TestPublishStatus.REVIEWED;
+                return this.test.status === TestPublishStatus.REVIEW;
             },
         },
         methods: {
@@ -49,14 +48,14 @@
                 this.isLoading = true;
 
                 try {
-                    api.post('moderation/tests/' + this.test.id + '/approve/');
+                    this.$api.post('moderation/tests/' + this.test.id + '/approve/');
 
                     this.isShowToolbar = false;
 
                     this.test.status = TestPublishStatus.PUBLISHED;
 
                     this.addNotification({
-                        'text': this.$t('MODERATION_TEST.APPROVE_SUBMITTED'),
+                        'text': this.$t('MODERATION_TEST.PUBLISHED'),
                         'color': 'success',
                         'timeout': 5000,
                     });
@@ -71,7 +70,7 @@
                 this.isLoading = true;
 
                 try {
-                    await api.post('moderation/tests/' + this.test.id + '/reject/');
+                    await this.$api.post('moderation/tests/' + this.test.id + '/reject/');
 
                     this.isShowToolbar = false;
 

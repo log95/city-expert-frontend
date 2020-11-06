@@ -1,6 +1,6 @@
 export default {
     NEW: 'new',
-    REVIEWED: 'reviewed',
+    REVIEW: 'review',
     ON_CORRECTION: 'on_correction',
     PUBLISHED: 'published',
 }

@@ -69,14 +69,14 @@
     "SUCCESS_UPDATED": "Тест успешно обновлён и отправлен на проверку. После проверки модератором вы получите уведомление."
   },
   "MODERATION_TEST": {
-    "APPROVE_BTN": "Одобрить",
+    "PUBLISH_BTN": "Опубликовать",
     "REJECT_BTN": "На корректировку",
-    "APPROVE_SUBMITTED": "Тест одобрен.",
+    "PUBLISHED": "Тест опубликован.",
     "REJECT_SUBMITTED": "Тест отправлен на корректировку.",
     "EMPTY_MESSAGE_ON_MODERATOR_REJECT": "При отклонении нужно оставить как минимум одно сообщение."
   },
   "TEST_PUBLISH_STATUS": {
-    "reviewed": "На проверке",
+    "review": "На проверке",
     "on_correction": "На корректировке",
     "published": "Опубликован"
   },

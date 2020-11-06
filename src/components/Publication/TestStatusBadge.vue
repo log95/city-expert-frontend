@@ -6,7 +6,7 @@
             label
     >
         <v-icon left small>mdi-timer-sand-empty</v-icon>
-        <span>{{ $t('TEST_PUBLISH_STATUS.reviewed') }}</span>
+        <span>{{ $t('TEST_PUBLISH_STATUS.review') }}</span>
     </v-chip>
     <v-chip
             v-else-if="this.isOnCorrection"
@@ -37,7 +37,7 @@
         ],
         computed: {
             isInReview: function () {
-                return this.status === TestPublishStatus.REVIEWED;
+                return this.status === TestPublishStatus.REVIEW;
             },
             isOnCorrection: function () {
                 return this.status === TestPublishStatus.ON_CORRECTION;

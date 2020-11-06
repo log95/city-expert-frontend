@@ -11,7 +11,7 @@
                         </div>
 
                         <div class="d-flex justify-center mb-6">
-                            <img :src="test ? test.image_url: null" style="max-height: 1000px; width: auto"/>
+                            <img :src="test ? test.image_url: null" style="width: 100%;"/>
                         </div>
                         <br><br>
 

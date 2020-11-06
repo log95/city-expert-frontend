@@ -35,7 +35,7 @@
         ],
         computed: {
             isStatusReviewed: function () {
-                return this.test.status === TestPublishStatus.REVIEWED;
+                return this.test.status === TestPublishStatus.REVIEW;
             },
             isStatusOnCorrection: function () {
                 return this.test.status === TestPublishStatus.ON_CORRECTION;

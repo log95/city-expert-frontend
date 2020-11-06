@@ -139,7 +139,7 @@
                 filterStatus: null,
                 filterStatusKeys: [
                     {text: this.$t('TEST_PUBLISH_STATUS.on_correction'), value: TestPublishStatus.ON_CORRECTION},
-                    {text: this.$t('TEST_PUBLISH_STATUS.reviewed'), value: TestPublishStatus.REVIEWED},
+                    {text: this.$t('TEST_PUBLISH_STATUS.review'), value: TestPublishStatus.REVIEW},
                     {text: this.$t('TEST_PUBLISH_STATUS.published'), value: TestPublishStatus.PUBLISHED},
                 ],
                 filterCity: null,

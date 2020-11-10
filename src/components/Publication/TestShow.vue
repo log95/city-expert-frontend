@@ -47,10 +47,10 @@
 
                         <div v-if="test">
                             <div>{{ $t('COMMENTS') }}</div>
-                            <Chat
-                                    :chatId="test.chat_id"
+                            <Comments
+                                    :testId="test.id"
                                     :isViewByCreator="isViewByCreator"
-                            ></Chat>
+                            ></Comments>
                         </div>
 
                     </v-card-text>
@@ -70,13 +70,13 @@
 </template>
 
 <script>
-    import Chat from '@/components/Chat/Chat';
+    import Comments from '@/components/Comments/Comments';
     import StatusBadge from "@/components/Publication/TestStatusBadge";
 
     export default {
         name: 'PublicationTestShow',
         components: {
-            Chat,
+            Comments,
             StatusBadge,
         },
         data: () => ({

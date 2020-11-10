@@ -73,7 +73,7 @@
     "REJECT_BTN": "На корректировку",
     "PUBLISHED": "Тест опубликован.",
     "REJECT_SUBMITTED": "Тест отправлен на корректировку.",
-    "EMPTY_MESSAGE_ON_MODERATOR_REJECT": "При отклонении нужно оставить как минимум одно сообщение."
+    "NO_COMMENT_ON_MODERATOR_REJECT": "При отклонении нужно оставить причину в комментарии."
   },
   "TEST_PUBLISH_STATUS": {
     "review": "На проверке",
@@ -106,5 +106,6 @@
     "TO_CORRECTION": "Вернуть на корректировку",
     "UPDATE": "Обновить"
   },
-  "WRONG_CREDENTIALS": "Неверный email или пароль"
+  "WRONG_CREDENTIALS": "Неверный email или пароль",
+  "MESSAGE": "Сообщение"
 }

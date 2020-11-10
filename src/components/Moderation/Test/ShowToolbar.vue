@@ -82,9 +82,9 @@
                         'timeout': 5000,
                     });
                 } catch (error) {
-                    if (error.response.data.type && error.response.data.type === 'EMPTY_MESSAGE_ON_MODERATOR_REJECT') {
+                    if (error.response.data.type && error.response.data.type === 'NO_COMMENT_ON_MODERATOR_REJECT') {
                         this.addNotification({
-                            'text': this.$t('MODERATION_TEST.EMPTY_MESSAGE_ON_MODERATOR_REJECT'),
+                            'text': this.$t('MODERATION_TEST.NO_COMMENT_ON_MODERATOR_REJECT'),
                             'color': 'error',
                             'timeout': 3000,
                         });

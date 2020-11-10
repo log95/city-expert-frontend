@@ -1,27 +1,27 @@
 <template>
-    <div class="chat elevation-3">
+    <div class="comments elevation-3">
         <div class="messages">
             <div
-                    v-for="message in messages"
-                    :key="message.id"
+                    v-for="comment in comments"
+                    :key="comment.id"
                     class="d-flex mb-6"
-                    :class="message.by_creator === isViewByCreator ? 'justify-start left-message' : 'justify-end right-message'"
+                    :class="comment.by_test_creator === isViewByCreator ? 'justify-start left-message' : 'justify-end right-message'"
             >
-                <div class="message-text">{{ message.text }}</div>
+                <div class="message-text">{{ comment.message }}</div>
             </div>
         </div>
 
-        <v-divider v-if="messages.length !== 0"></v-divider>
+        <v-divider v-if="comments.length !== 0"></v-divider>
 
         <div>
             <v-text-field
                     v-model="userMessage"
                     append-outer-icon="mdi-send"
-                    label="Сообщение"
+                    :label="$t('MESSAGE')"
                     clearable
                     :loading="isSendingMessage"
                     style="padding: 10px"
-                    @click:append-outer="sendMessage"
+                    @click:append-outer="addComment"
                     @click:clear="clearUserMessage"
             ></v-text-field>
         </div>
@@ -29,22 +29,32 @@
 </template>
 
 <script>
-    import api from '@/api';
+    import { mapActions, mapState, mapMutations } from 'vuex';
 
     export default {
-        name: 'Chat',
+        name: 'Comments',
         data: () => ({
-            messages: [],
             userMessage: '',
 
             isSendingMessage: false,
         }),
+        computed: {
+            ...mapState('testComments', {
+                comments: 'comments',
+            }),
+        },
         props: [
-            'chatId',
+            'testId',
             'isViewByCreator',
         ],
         methods: {
-            async sendMessage() {
+            ...mapActions({
+                loadComments: 'testComments/loadList',
+            }),
+            ...mapMutations({
+                addCommentStore: 'testComments/addComment',
+            }),
+            async addComment() {
                 if (this.isSendingMessage) {
                     return;
                 }
@@ -52,14 +62,15 @@
                 try {
                     this.isSendingMessage = true;
 
-                    let response = await api.post('chat/' + this.chatId + '/messages/', {
+                    let response = await this.$api.post('tests/' + this.testId + '/comments/', {
                         message: this.userMessage,
                     });
 
-                    this.messages.push({
+                    this.addCommentStore({
                         'id': response.data.id,
-                        'text': this.userMessage,
-                        'by_creator': this.isViewByCreator,
+                        'message': response.message,
+                        'author_name': response.author_name,
+                        'by_test_creator': this.isViewByCreator,
                     });
 
                     this.clearUserMessage();
@@ -75,19 +86,13 @@
             },
         },
         async created() {
-            try {
-                let response = await api.get('chat/' + this.chatId + '/messages/');
-                this.messages = response.data.messages;
-            } catch (error) {
-                alert('Error');
-                console.log(error.response);
-            }
+            this.loadComments(this.testId);
         },
     }
 </script>
 
 <style>
-    .chat .messages {
+    .comments .messages {
         max-height: 300px;
         overflow-y: auto;
         padding: 10px;

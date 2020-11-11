@@ -8,7 +8,7 @@
                     class="float-left"
             >
                 <v-icon small>mdi-arrow-left</v-icon>
-                <span>К списку</span>
+                <span>{{ $t('TO_TEST_LIST') }}</span>
             </v-btn>
         </div>
 

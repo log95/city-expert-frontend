@@ -1,13 +1,20 @@
 <template>
-    <div class="comments elevation-3">
-        <div class="messages">
+    <div class="elevation-3">
+        <div id="comments" class="comments">
             <div
-                    v-for="comment in comments"
-                    :key="comment.id"
-                    class="d-flex mb-6"
-                    :class="comment.by_test_creator === isViewByCreator ? 'justify-start left-message' : 'justify-end right-message'"
+                v-for="comment in comments"
+                :key="comment.id"
+                class="d-flex mb-6"
+                :class="comment.by_test_creator === isViewByCreator ? 'justify-start' : 'justify-end'"
             >
-                <div class="message-text">{{ comment.message }}</div>
+                <div
+                    class="comment-wrapper"
+                    :class="comment.by_test_creator === isViewByCreator ? 'left-comment' : 'right-comment'"
+                >
+                    <div class="comment-author">{{ comment.author_name }}</div>
+                    <div class="comment-message">{{ comment.message }}</div>
+                </div>
+
             </div>
         </div>
 
@@ -52,10 +59,10 @@
                 loadComments: 'testComments/loadList',
             }),
             ...mapMutations({
-                addCommentStore: 'testComments/addComment',
+                addCommentToStore: 'testComments/addComment',
             }),
             async addComment() {
-                if (this.isSendingMessage) {
+                if (this.isSendingMessage || !this.userMessage) {
                     return;
                 }
 
@@ -66,12 +73,14 @@
                         message: this.userMessage,
                     });
 
-                    this.addCommentStore({
+                    this.addCommentToStore({
                         'id': response.data.id,
-                        'message': response.message,
-                        'author_name': response.author_name,
+                        'message': response.data.message,
+                        'author_name': response.data.author_name,
                         'by_test_creator': this.isViewByCreator,
                     });
+
+                    this.scrollToLastComment();
 
                     this.clearUserMessage();
                 } catch (error) {
@@ -84,33 +93,51 @@
             clearUserMessage: function () {
                 this.userMessage = '';
             },
+            scrollToLastComment: function () {
+                let  self = this;
+                setTimeout(function() {
+                    let comments = self.$el.querySelector("#comments");
+                    comments.scrollTop = comments.scrollHeight;
+                }, 300);
+            },
         },
         async created() {
-            this.loadComments(this.testId);
+            await this.loadComments(this.testId);
+
+            this.scrollToLastComment();
         },
     }
 </script>
 
 <style>
-    .comments .messages {
+    .comments {
         max-height: 300px;
         overflow-y: auto;
         padding: 10px;
     }
 
-    .message-text {
-        padding: 10px;
-        border-radius: .3em;
+    .comment-wrapper {
+        padding: 5px;
         color: black;
-        font-size: 14px;
         max-width: 50%;
     }
 
-    .left-message > .message-text {
+    .comment-wrapper .comment-author {
+        font-size: 12px;
+
+    }
+
+    .comment-wrapper .comment-message {
+        font-size: 14px;
+        padding: 10px;
+        border-radius: .3em;
+    }
+
+    .left-comment .comment-message {
         background-color: palegreen;
     }
 
-    .right-message > .message-text {
+    .right-comment .comment-message {
         background-color: powderblue;
     }
 </style>

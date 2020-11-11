@@ -46,7 +46,7 @@
                         <br><br>
 
                         <div v-if="test">
-                            <div>{{ $t('COMMENTS') }}</div>
+                            <div style="margin-bottom: 5px">{{ $t('COMMENTS') }}</div>
                             <Comments
                                     :testId="test.id"
                                     :isViewByCreator="isViewByCreator"

@@ -107,5 +107,8 @@
     "UPDATE": "Обновить"
   },
   "WRONG_CREDENTIALS": "Неверный email или пароль",
-  "MESSAGE": "Сообщение"
+  "MESSAGE": "Сообщение",
+  "WS_MESSAGE": {
+    "NEW_TEST_COMMENT": "Новый комментарий по тесту.<br><a href=\"{link}\">{link_text}</a>"
+  }
 }

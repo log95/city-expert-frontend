@@ -22,6 +22,7 @@
   import LayoutFooter from '@/components/Layout/Footer';
   import Snackbar from "@/components/Ui/Snackbar";
   import Notifications from "@/components/Ui/Notifications";
+  import wsHandler from "@/ws/handler";
 
   export default {
     name: 'App',
@@ -31,19 +32,24 @@
       Snackbar,
       Notifications,
     },
+    methods: {
+      handleWsMessages() {
+        if (!this.isAuthorized()) {
+          return;
+        }
+
+        const wsBaseUrl = process.env.VUE_APP_WS_BASE_URL;
+        const wsUrl = wsBaseUrl + '?token=' + localStorage.getItem('JWT_TOKEN');
+
+        let wsConn = new WebSocket(wsUrl);
+
+        wsConn.onmessage = function (e) {
+          wsHandler.handleWsMessage(e.data);
+        };
+      },
+    },
     created() {
-      if (!this.isAuthorized()) {
-        return;
-      }
-
-      const wsBaseUrl = process.env.VUE_APP_WS_BASE_URL;
-      const wsUrl = wsBaseUrl + '?token=' + localStorage.getItem('JWT_TOKEN');
-
-      let wsConn = new WebSocket(wsUrl);
-
-      wsConn.onmessage = function (e) {
-        console.log(JSON.parse(e.data));
-      };
+      this.handleWsMessages();
     }
   };
 </script>

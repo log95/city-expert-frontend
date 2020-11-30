@@ -29,6 +29,7 @@
                     :loading="isSendingMessage"
                     style="padding: 10px"
                     @click:append-outer="addComment"
+                    @keyup.enter="addComment"
                     @click:clear="clearUserMessage"
             ></v-text-field>
         </div>

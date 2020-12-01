@@ -8,7 +8,8 @@
     "ENTER": "Войти",
     "MY_TESTS": "Мои тесты",
     "LOGOUT": "Выйти",
-    "MODERATION": "Модерация"
+    "MODERATION": "Модерация",
+    "POINTS": "Очки: {points}"
   },
   "LOADING": "Загрузка...",
   "REQUIRED_FIELD": "Обязательное поле",

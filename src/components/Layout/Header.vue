@@ -20,6 +20,13 @@
 
         <v-spacer></v-spacer>
 
+        <span
+            v-if="isAuthorized() && points !== null"
+            class="user-points"
+        >
+            {{ $t('HEADER_TOOLBAR.POINTS', {'points': points}) }}
+        </span>
+
         <v-menu bottom offset-y>
             <template v-slot:activator="{ on }">
                 <v-btn
@@ -88,6 +95,8 @@
 </template>
 
 <script>
+    import { mapState } from 'vuex';
+
     export default {
         name: 'LayoutHeader',
         methods: {
@@ -99,5 +108,17 @@
                 window.location.href = startPage.href;
             },
         },
+        computed: {
+            ...mapState('userPoints', {
+                points: 'points',
+            }),
+        },
     }
 </script>
+
+<style>
+    .user-points {
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+</style>

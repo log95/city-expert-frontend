@@ -23,6 +23,7 @@
   import Snackbar from "@/components/Ui/Snackbar";
   import Notifications from "@/components/Ui/Notifications";
   import wsHandler from "@/ws/handler";
+  import { mapState, mapMutations } from 'vuex';
 
   export default {
     name: 'App',
@@ -32,7 +33,15 @@
       Snackbar,
       Notifications,
     },
+    computed: {
+      ...mapState('userPoints', {
+        points: 'points',
+      }),
+    },
     methods: {
+      ...mapMutations({
+        setUserPoints: 'userPoints/setPoints',
+      }),
       handleWsMessages() {
         if (!this.isAuthorized()) {
           return;
@@ -47,9 +56,25 @@
           wsHandler.handleWsMessage(e.data);
         };
       },
+      async loadUserPoints() {
+        if (!this.isAuthorized()) {
+          return;
+        }
+
+        // Points is already loaded.
+        if (this.points !== null) {
+          return;
+        }
+
+        const response = await this.$api.get('account/user/points/');
+
+        this.setUserPoints(response.data);
+      },
     },
     created() {
       this.handleWsMessages();
+
+      this.loadUserPoints();
     }
   };
 </script>

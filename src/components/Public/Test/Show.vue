@@ -189,6 +189,7 @@
         methods: {
             ...mapMutations({
                 addNotification: 'snackbar/addNotification',
+                addPointsToStore: 'userPoints/addPoints',
             }),
 
             checkAnswer: function () {
@@ -201,6 +202,8 @@
                             this.$set(this.test, 'answer', this.userAnswer);
                             this.test.status = TestStatus.CORRECT_ANSWER;
                             this.makeAllHintsAvailable();
+
+                            this.addPointsToStore(PointsMap.CORRECT_ANSWER);
 
                             this.addNotification({
                                 'text': this.$t('POINTS_NOTICE.CORRECT_ANSWER', {points: PointsMap.CORRECT_ANSWER}),
@@ -224,6 +227,8 @@
                         this.$set(this.test, 'answer', response.data.answer);
                         this.test.status = TestStatus.SHOW_ANSWER;
                         this.makeAllHintsAvailable();
+
+                        this.addPointsToStore(PointsMap.SHOW_ANSWER);
 
                         this.addNotification({
                             'text': this.$t('POINTS_NOTICE.SHOW_ANSWER', {points: PointsMap.SHOW_ANSWER}),
@@ -257,6 +262,8 @@
                                 'color': 'orange',
                             });
                             this.hints[indexArray]['isAccessible'] = true;
+
+                            this.addPointsToStore(PointsMap.SHOW_HINT);
                         }
                     })
                     .catch(error => {

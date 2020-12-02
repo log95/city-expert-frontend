@@ -7,8 +7,9 @@
     >
         <router-link :to="{ name: 'PublicTestShowPage', params: { test_id: test.id }}">
             <v-img
-                    :aspect-ratio="16/9"
-                    :src="test['image_url']"
+                    :src="resizedImageUrl"
+                    width="430px"
+                    height="242px"
                     class="test-image"
                     :class="test['status']"
             ></v-img>
@@ -29,11 +30,21 @@
 </template>
 
 <script>
+    import Resizer from '@/utils/resizer';
+
     export default {
         name: 'PublicTestListItem',
         props: [
             'test',
         ],
+        computed: {
+            resizedImageUrl () {
+                return Resizer.getResizedImageUrl(this.test.image_url, {
+                    'WIDTH': 430,
+                    'HEIGHT': 242,
+                });
+            },
+        },
     }
 </script>
 

@@ -27,7 +27,7 @@
             <h2 class="text-center">{{ test.question }}</h2><br>
 
             <div class="d-flex justify-center mb-6">
-                <img :src="test.image_url" style="max-height: 1000px; width: auto"/>
+                <img :src="resizedImageUrl">
             </div>
 
             <div class="d-flex justify-center mb-6">
@@ -164,6 +164,7 @@
     import PointsMap from '@/enum/PointsMap';
     import TestStatusBadge from '@/components/Public/Test/TestStatusBadge';
     import TestStatus from "../../../enum/TestStatus";
+    import Resizer from '@/utils/resizer';
     import { mapMutations } from 'vuex';
 
     export default {
@@ -184,6 +185,12 @@
             },
             hintPointsText: function () {
                 return PointsMap.SHOW_HINT + ' ' + this.$t('POINT');
+            },
+            resizedImageUrl () {
+                return Resizer.getResizedImageUrl(this.test.image_url, {
+                    'WIDTH': 0,
+                    'HEIGHT': 530,
+                });
             },
         },
         methods: {

@@ -11,7 +11,7 @@
                         </div>
 
                         <div class="d-flex justify-center mb-6">
-                            <img :src="test ? test.image_url: null" style="width: 100%;"/>
+                            <img :src="test ? resizedImageUrl : null">
                         </div>
                         <br><br>
 
@@ -72,6 +72,7 @@
 <script>
     import Comments from '@/components/Comments/Comments';
     import StatusBadge from "@/components/Publication/TestStatusBadge";
+    import Resizer from '@/utils/resizer';
 
     export default {
         name: 'PublicationTestShow',
@@ -85,6 +86,14 @@
         props: [
             'isViewByCreator',
         ],
+        computed: {
+            resizedImageUrl () {
+                return Resizer.getResizedImageUrl(this.test.image_url, {
+                    'WIDTH': 0,
+                    'HEIGHT': 530,
+                });
+            },
+        },
         async created() {
             let response = await this.$api.get('publication/tests/' + this.$route.params['test_id'] + '/');
             this.test = response.data;

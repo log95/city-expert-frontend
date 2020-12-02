@@ -12,5 +12,5 @@ module.exports = {
     }
   },
 
-  lintOnSave: false // TODO: пока мешает правилом no-unused-var
+  lintOnSave: false
 }

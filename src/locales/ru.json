@@ -2,7 +2,6 @@
   "MAIN_TOOLBAR_ITEMS": {
     "TESTS": "Тесты"
   },
-  "APP_NAME": "Город",
   "STATUS": "Статус",
   "HEADER_TOOLBAR": {
     "ENTER": "Войти",
@@ -111,5 +110,16 @@
   "MESSAGE": "Сообщение",
   "WS_MESSAGE": {
     "NEW_TEST_COMMENT": "Новый комментарий по тесту.<br><a href=\"{link}\">{link_text}</a>"
+  },
+  "START_PAGE": {
+    "CARD_REGISTER": {
+      "TITLE": "Регистрируйся и испытай свои знания",
+      "SUBTITLE": "Отгадывай тесты, получай очки.",
+      "REGISTER_ACTION": "Зарегистрироваться"
+    },
+    "CARD_ADD_OWN_TESTS": {
+      "TITLE": "Добавляй собственные тесты",
+      "SUBTITLE": "Знаешь хорошо город? Добавляй интересные места, чтобы оценили другие."
+    }
   }
 }

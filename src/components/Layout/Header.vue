@@ -5,7 +5,11 @@
             dark
             absolute
     >
-        <v-toolbar-title>{{ $t('APP_NAME') }}</v-toolbar-title>
+        <v-toolbar-title>
+            <a :href="$router.resolve({'name': 'StartPage'}).href">
+                <img src="/images/logo.png" width="60px" height="60px"/>
+            </a>
+        </v-toolbar-title>
 
         <v-spacer></v-spacer>
 
